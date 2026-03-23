@@ -368,10 +368,24 @@
     overflow: hidden; transition: var(--transition); display: flex; flex-direction: column;
   }
   .project-card:hover { transform: translateY(-6px); box-shadow: 0 20px 50px var(--glow); border-color: rgba(124,92,252,0.3); }
-  .project-img {
-    height: 180px; position: relative; overflow: hidden;
-    display: flex; align-items: center; justify-content: center;
-  }
+.project-img {
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+
+.project-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.project-card:hover .project-img img {
+  transform: scale(1.08);
+}
   .project-img-placeholder {
     width: 100%; height: 100%;
     display: flex; align-items: center; justify-content: center;
@@ -454,7 +468,10 @@
     transition: var(--transition);
   }
   .cert-btn:hover { background: var(--accent); color: white; border-color: var(--accent); }
-
+.train-desc {
+  font-size: 0.78rem;
+  color: var(--text3);
+}
   /* CERTIFICATIONS */
   #certifications { background: var(--bg2); }
   .certs-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
@@ -468,21 +485,85 @@
   .cert-issuer { color: var(--accent2); font-size: 0.85rem; font-weight: 600; margin-bottom: 4px; }
   .cert-date { color: var(--text3); font-size: 0.8rem; margin-bottom: 18px; flex: 1; }
 
-  /* ACHIEVEMENTS */
-  .achievements-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
-  .ach-card {
-    background: var(--surface); border: 1px solid var(--border); border-radius: 18px;
-    padding: 32px; text-align: center; transition: var(--transition);
-  }
-  .ach-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(250,204,21,0.1); border-color: rgba(250,204,21,0.3); }
-  .ach-icon { font-size: 3rem; margin-bottom: 16px; display: block; }
-  .ach-title { font-family: 'Syne', sans-serif; font-size: 1.1rem; font-weight: 700; margin-bottom: 8px; }
-  .ach-desc { color: var(--text3); font-size: 0.9rem; line-height: 1.6; }
-  .ach-badge {
-    display: inline-block; margin-top: 12px;
-    padding: 4px 12px; border-radius: 8px; font-size: 0.8rem; font-weight: 600;
-    background: rgba(250,204,21,0.1); color: #fbbf24; border: 1px solid rgba(250,204,21,0.2);
-  }
+/* ACHIEVEMENTS */
+.achievements-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+}
+
+.ach-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 28px;
+  text-align: center;
+  transition: var(--transition);
+
+  display: flex;              /* 🔥 important */
+  flex-direction: column;
+  align-items: center;
+}
+
+.ach-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(250,204,21,0.1);
+  border-color: rgba(250,204,21,0.3);
+}
+
+.ach-icon {
+  font-size: 2.6rem;          /* slightly smaller */
+  margin-bottom: 14px;
+}
+
+.ach-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.ach-desc {
+  color: var(--text3);
+  font-size: 0.88rem;
+  line-height: 1.6;
+  margin-bottom: 10px;
+}
+
+/* Badge */
+.ach-badge {
+  display: inline-block;
+  margin-top: 8px;
+  padding: 4px 12px;
+  border-radius: 8px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  background: rgba(250,204,21,0.1);
+  color: #fbbf24;
+  border: 1px solid rgba(250,204,21,0.2);
+}
+
+/* 🔥 BUTTON FIXED */
+.ach-link {
+  display: inline-block;     /* ✅ no full width */
+  margin-top: 12px;
+  padding: 5px 12px;         /* smaller */
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--accent2);
+  border: 1px solid var(--border);
+  border-radius: 8px;        /* smaller radius */
+  text-decoration: none;
+  background: var(--surface2);
+  transition: var(--transition);
+}
+
+.ach-link:hover {
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  color: white;
+  border-color: transparent;
+  transform: translateY(-2px);
+}
 
   /* EDUCATION */
   #education { background: var(--bg2); }
@@ -852,7 +933,7 @@
 
       <div class="project-card reveal" data-cat="ai">
         <div class="project-img">
-          <div class="project-img-placeholder" style="background:linear-gradient(135deg,#0f0f1e,#1a0b2e)">🩺</div>
+          <img src="skin.jpg" alt="Skin Condition Project Screenshot">
         </div>
         <div class="project-body">
           <div class="project-cat">AI / Deep Learning</div>
@@ -868,7 +949,7 @@
 
       <div class="project-card reveal" data-cat="ml">
         <div class="project-img">
-          <div class="project-img-placeholder" style="background:linear-gradient(135deg,#0f1e0f,#0b2a1a)">♻️</div>
+          <img src="wastee.jpg" alt="Skin Condition Project Screenshot">
         </div>
         <div class="project-body">
           <div class="project-cat">ML / Optimization</div>
@@ -884,7 +965,7 @@
 
       <div class="project-card reveal" data-cat="software">
         <div class="project-img">
-          <div class="project-img-placeholder" style="background:linear-gradient(135deg,#0e1a2e,#0a1020)">🎓</div>
+          <img src="studentjpg.jpg" alt="Skin Condition Project Screenshot">
         </div>
         <div class="project-body">
           <div class="project-cat">Software Engineering</div>
@@ -900,7 +981,7 @@
 
       <div class="project-card reveal" data-cat="ai">
         <div class="project-img">
-          <div class="project-img-placeholder" style="background:linear-gradient(135deg,#1a0e2e,#0d0a1e)">🤖</div>
+          <img src="ai.jpg" alt="Skin Condition Project Screenshot">
         </div>
         <div class="project-body">
           <div class="project-cat">AI / LLM</div>
@@ -916,7 +997,7 @@
 
       <div class="project-card reveal" data-cat="software">
         <div class="project-img">
-          <div class="project-img-placeholder" style="background:linear-gradient(135deg,#0a1a2e,#061018)">📚</div>
+          <img src="ocms.jpg" alt="Skin Condition Project Screenshot">
         </div>
         <div class="project-body">
           <div class="project-cat">Software Engineering</div>
@@ -974,7 +1055,12 @@
         <div class="timeline-dot"></div>
         <div class="timeline-card">
           <div class="timeline-title">Python Full Stack Development</div>
-          <div class="timeline-sub">Ongoing · Full Stack Training Program</div>
+
+          <div class="timeline-sub">
+  Ongoing · Cyberschool
+  <br>
+  <span class="train-desc">Building end-to-end web applications with backend integration.</span>
+</div>
           <a href="#" class="cert-btn">🟢 ON GOING </a>
         </div>
       </div>
@@ -982,7 +1068,11 @@
         <div class="timeline-dot"></div>
         <div class="timeline-card">
           <div class="timeline-title">Data Structures & Algorithms Certification</div>
-          <div class="timeline-sub">Completed · Lovely Professional University (LPU)</div>
+          <div class="timeline-sub">
+  Completed · Lovely Professional University (LPU)
+  <br>
+  <span class="train-desc">Strengthened problem-solving and algorithmic thinking skills.</span>
+</div>
           <a href="https://drive.google.com/file/d/1GyRgec0ZhAcuDb7u7twSJvvWtx0oUbbh/view" class="cert-btn">📄 View Certificate</a>
         </div>
       </div>
@@ -990,8 +1080,11 @@
         <div class="timeline-dot"></div>
         <div class="timeline-card">
           <div class="timeline-title">Python Programming Training</div>
-          <div class="timeline-sub">Completed · CSE Pathshala</div>
-          <a href="https://drive.google.com/file/d/1T5jpZSNS5a-fYeq0pb2aIAzOvIbSmuWh/view" class="cert-btn">📄 View Certificate</a>
+<div class="timeline-sub">
+  Completed · CSE Pathshala
+  <br>
+  <span class="train-desc">Developed strong foundation in Python and core programming concepts.</span>
+</div>          <a href="https://drive.google.com/file/d/1T5jpZSNS5a-fYeq0pb2aIAzOvIbSmuWh/view" class="cert-btn">📄 View Certificate</a>
         </div>
       </div>
     </div>
@@ -1047,17 +1140,26 @@
     </div>
     <div class="achievements-grid">
       <div class="ach-card reveal">
+       
         <span class="ach-icon">⭐</span>
         <div class="ach-title">HackerRank 5-Star Gold</div>
         <div class="ach-desc">Achieved 5-star Gold rating in both Python and C++ on HackerRank through consistent problem solving and competitive programming.</div>
         <span class="ach-badge">🏅 Gold · Python & C++</span>
+ <a href="https://www.hackerrank.com/profile/ammuttya20" target="_blank" class="ach-link">
+  🔗 View Profile
+</a>
       </div>
       <div class="ach-card reveal">
-        <span class="ach-icon">🏆</span>
-        <div class="ach-title">CodeChef Gold & Silver</div>
-        <div class="ach-desc">Solved 250+ competitive programming problems on CodeChef, earning Gold and Silver ratings across multiple difficulty categories.</div>
-        <span class="ach-badge">🥇 Gold · 🥈 Silver · 250+ Problems</span>
-      </div>
+  <span class="ach-icon">🏆</span>
+  <div class="ach-title">CodeChef Gold & Silver</div>
+  <div class="ach-desc">Solved 250+ competitive programming problems and secured Golden and Silver badge on codechef</div>
+  <span class="ach-badge">🥇 Gold · 🥈 Silver · 250+ Problems</span>
+
+  <!-- ✅ MOVE HERE -->
+  <a href="https://www.codechef.com/users/ammusss" target="_blank" class="ach-link">
+    🔗 View Profile
+  </a>
+</div>
     </div>
   </div>
 </section>
@@ -1179,7 +1281,7 @@
 
 <!-- FOOTER -->
 <footer>
-  <p>© 2025 Ammu S · AI/ML Engineer & Software Developer · Built with 💜 · Punjab, India</p>
+  <p>© 2025 Ammu S · AI/ML Engineer & Software Developer. Punjab, India</p>
 </footer>
 
 <!-- Back to Top -->

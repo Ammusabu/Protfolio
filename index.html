@@ -201,7 +201,7 @@
     font-family: 'Syne', sans-serif; font-size: clamp(2.6rem,5.2vw,5rem); font-weight: 800;
     line-height: 1.02; margin-bottom: 4px; letter-spacing: -0.02em;
   }
-  .hero-name .hi-text { color: var(--text2); font-weight: 600; font-size: 0.65em; display: block; letter-spacing: 0.04em; margin-bottom: 4px; text-transform: uppercase; }
+  .hero-name .hi-text { color: var(--text2); font-weight: 600; font-size: 0.45em; display: block; letter-spacing: 0.04em; margin-bottom: 4px; text-transform: uppercase; }
   .hero-name span { background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 55%, var(--accent3) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
   .hero-title {
     font-size: 1.1rem; color: var(--text2); margin-bottom: 20px; font-weight: 500;
@@ -245,6 +245,21 @@
     border: 1px solid var(--border);
   }
   .btn-secondary:hover { background: var(--surface2); transform: translateY(-2px); }
+.typing-text {
+  font-size: 1rem;
+  color: var(--accent2);
+  margin-bottom: 10px;
+  font-weight: 500;
+}
+
+.cursor {
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0%, 50%, 100% { opacity: 1; }
+  25%, 75% { opacity: 0; }
+}
 
   /* PROFILE IMAGE */
   .hero-image-wrap {
@@ -781,12 +796,16 @@
           Software Developer
         </p>
 
+         <!--Floating -->
+        <div class="typing-text">
+        <span id="typing"></span><span class="cursor">|</span>
+        </div>
+
         <!-- Description -->
         <p class="hero-desc">
           I build scalable systems by integrating machine learning with modern software engineering, focused on solving real-world problems.
         </p>
-
-        <!-- Stats -->
+ <!-- Stats -->
         <div class="hero-stats">
           <div class="stat-item">
             <span class="stat-num">5+</span>
@@ -809,6 +828,7 @@
         </div>
 
       </div>
+      
 
       <!-- RIGHT IMAGE -->
       <div class="hero-image-wrap">
@@ -1295,6 +1315,47 @@ window.addEventListener('load', () => {
     setTimeout(() => document.getElementById('splash').remove(), 900);
   }, 2400);
 });
+
+
+
+const texts = [
+  "I build AI-powered systems",
+  "I create scalable backend solutions",
+  "I solve real-world problems with ML",
+  "I develop intelligent software"
+];
+
+let i = 0;
+let j = 0;
+let currentText = "";
+let isDeleting = false;
+
+function type() {
+  currentText = texts[i];
+
+  if (isDeleting) {
+    document.getElementById("typing").textContent = currentText.substring(0, j--);
+  } else {
+    document.getElementById("typing").textContent = currentText.substring(0, j++);
+  }
+
+  if (!isDeleting && j === currentText.length) {
+    isDeleting = true;
+    setTimeout(type, 1200);
+    return;
+  }
+
+  if (isDeleting && j === 0) {
+    isDeleting = false;
+    i = (i + 1) % texts.length;
+  }
+
+  setTimeout(type, isDeleting ? 40 : 80);
+}
+
+type();
+
+
 
 // ── THEME ──
 const body = document.body;
